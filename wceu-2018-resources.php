@@ -2,7 +2,7 @@
 
 /*
  * Plugin Name:     WCEU-2018 Workshop Code: Resources
- * Plugin URI:      https://github.com/schlessera/wceu-2018-auth
+ * Plugin URI:      https://github.com/schlessera/wceu-2018-resources
  * Description:     Resources for the WordCamp Europe 2018 Workshop "Dependency Injection and Design Patterns in Real Life" presented by David Mosterd & Alain Schlesser
  * Author:          David Mosterd & Alain Schlesser
  * Version:         1.0.0
