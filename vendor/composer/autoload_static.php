@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit92396da6aa763c2cf219b378eae81c97
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
-            'WordCampEurope\\WorkshopAuth\\' => 28,
+            'WordCampEurope\\Resources\\' => 28,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'WordCampEurope\\WorkshopAuth\\' => 
+        'WordCampEurope\\Resources\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

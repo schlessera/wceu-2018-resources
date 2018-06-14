@@ -8,10 +8,10 @@
  * Version:         1.0.0
  */
 
-use WordCampEurope\WorkshopAuth\Page;
-use WordCampEurope\WorkshopAuth\OAuth;
-use WordCampEurope\WorkshopAuth\Content;
-use WordCampEurope\WorkshopAuth\Pages;
+use WordCampEurope\Resources\Page;
+use WordCampEurope\Resources\OAuth;
+use WordCampEurope\Resources\Content;
+use WordCampEurope\Resources\Pages;
 
 define( 'WCEU_WORKSHOP_AUTH_URL', plugin_dir_url( __FILE__ ) );
 define( 'WCEU_WORKSHOP_AUTH_DIR', plugin_dir_path( __FILE__ ) );

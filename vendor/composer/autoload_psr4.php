@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'WordCampEurope\\WorkshopAuth\\' => array($baseDir . '/src'),
+    'WordCampEurope\\Resources\\' => array($baseDir . '/src'),
 );

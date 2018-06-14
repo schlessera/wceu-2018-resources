@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace WordCampEurope\WorkshopAuth\Content;
+namespace WordCampEurope\Resources\Content;
 
-use WordCampEurope\WorkshopAuth\Content;
-use WordCampEurope\WorkshopAuth\ContentSteps;
-use WordCampEurope\WorkshopAuth\View;
-use WordCampEurope\WorkshopAuth\Page;
+use WordCampEurope\Resources\Content;
+use WordCampEurope\Resources\ContentSteps;
+use WordCampEurope\Resources\View;
+use WordCampEurope\Resources\Page;
 
 class WPApp extends Content {
 

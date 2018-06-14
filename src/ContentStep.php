@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace WordCampEurope\WorkshopAuth;
+namespace WordCampEurope\Resources;
 
 class ContentStep {
 

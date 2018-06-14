@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-use WordCampEurope\WorkshopAuth\ContentStep;
+use WordCampEurope\Resources\ContentStep;
 
 /* @var $steps ContentStep[] */
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-namespace WordCampEurope\WorkshopAuth;
+namespace WordCampEurope\Resources;
 
 interface Registrable {
 

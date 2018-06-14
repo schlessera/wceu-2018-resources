@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace WordCampEurope\WorkshopAuth\Content;
+namespace WordCampEurope\Resources\Content;
 
-use WordCampEurope\WorkshopAuth\ContentSteps;
-use WordCampEurope\WorkshopAuth\View;
-use WordCampEurope\WorkshopAuth\Content;
+use WordCampEurope\Resources\ContentSteps;
+use WordCampEurope\Resources\View;
+use WordCampEurope\Resources\Content;
 
 class TwitterApp extends Content {
 
