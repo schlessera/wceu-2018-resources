@@ -2,7 +2,13 @@
 
 namespace WordCampEurope\WorkshopAuth;
 
-class Page {
+class Page
+	implements Registrable {
+
+	/**
+	 * @var bool
+	 */
+	protected $loaded = false;
 
 	/**
 	 * @var string
@@ -20,21 +26,28 @@ class Page {
 	protected $url = '';
 
 	/**
+	 * @var int
+	 */
+	protected $id = 0;
+
+	/**
+	 * @param string $slug
+	 * @param string $title
+	 */
+	public function __construct( string $slug, string $title ) {
+		$this->slug = $slug;
+		$this->title = $title;
+	}
+
+	public function register() {
+		add_action( 'after_setup_theme', [ $this, 'persist' ] );
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_title(): string {
 		return $this->title;
-	}
-
-	/**
-	 * @param string $title
-	 *
-	 * @return $this
-	 */
-	public function set_title( string $title ): Page {
-		$this->title = $title;
-
-		return $this;
 	}
 
 	/**
@@ -45,63 +58,53 @@ class Page {
 	}
 
 	/**
-	 * @param string $slug
-	 *
-	 * @return $this
-	 */
-	public function set_slug( string $slug ): Page {
-		$this->slug = $slug;
-
-		return $this;
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_url(): string {
+		if ( ! $this->loaded ) {
+			$this->load();
+		}
+
 		return $this->url;
-	}
-
-	/**
-	 * @return Page
-	 */
-	public function set_url(): Page {
-		$this->url = get_permalink( $this->get_id() );
-
-		return $this;
 	}
 
 	/**
 	 * @return int
 	 */
 	public function get_id(): int {
-		$page = $this->get_page();
-
-		if ( ! $page ) {
-			return $this->persist();
+		if ( ! $this->loaded ) {
+			$this->load();
 		}
 
-		return $page->ID;
+		return $this->id;
 	}
 
-	protected function persist() {
-		$result = wp_insert_post( [
+	protected function load() {
+		$this->loaded = true;
+		$page = get_page_by_path( $this->slug );
+
+		if ( $page instanceof \WP_Post ) {
+			$this->id = $page->ID;
+			$this->url = get_permalink( $page->ID );
+		}
+	}
+
+	public function persist() {
+		if ( ! $this->loaded ) {
+			$this->load();
+		}
+
+		if ( $this->id ) {
+			return;
+		}
+
+		wp_insert_post( [
 			'post_type'    => 'page',
 			'post_content' => '',
 			'post_status'  => 'publish',
 			'post_title'   => $this->title,
 			'post_name'    => $this->slug,
 		] );
-
-		if ( is_wp_error( $result ) ) {
-			$result = 0;
-		}
-
-		return $result;
-	}
-
-	protected function get_page() {
-		return get_page_by_path( $this->slug );
 	}
 
 }

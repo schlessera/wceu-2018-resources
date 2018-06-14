@@ -2,13 +2,7 @@
 
 namespace WordCampEurope\WorkshopAuth;
 
-class ContentSteps
-	implements \Iterator {
-
-	/**
-	 * @var ContentStep[]
-	 */
-	protected $steps = [];
+class ContentSteps extends Collection {
 
 	/**
 	 * @param ContentStep $step
@@ -20,7 +14,7 @@ class ContentSteps
 			$step = new ContentStep();
 		}
 
-		$this->steps[] = $step;
+		$this->data[] = $step;
 
 		return $step;
 	}
@@ -28,36 +22,8 @@ class ContentSteps
 	/**
 	 * @inheritDoc
 	 */
-	public function current() {
-		return current( $this->steps );
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function next() {
-		return next( $this->steps );
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function key() {
-		return key( $this->steps ) + 1;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function valid() {
-		return key( $this->steps ) !== null;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function rewind() {
-		return reset( $this->steps );
+		return parent::key() + 1;
 	}
 
 }
