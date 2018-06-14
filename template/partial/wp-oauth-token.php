@@ -3,5 +3,5 @@
 
 	<br><br>
 
-	<?= $token; ?>
+	<?= esc_html( $token ); ?>
 </p>

@@ -1,21 +1,22 @@
 <?php declare( strict_types=1 );
 
-use WordCampEurope\WorkshopAuth\PageStep;
+use WordCampEurope\WorkshopAuth\ContentStep;
 
-/* @var $steps PageStep[] */
+/* @var $steps ContentStep[] */
 ?>
 
 <?php foreach ( $steps as $n => $step ) : ?>
-	<h2><?= $n . '. ' . $step->get_title(); ?></h2>
+	<h2><?= esc_html( $n . '. ' . $step->get_title() ); ?></h2>
+
+	<p>
+		<?= wp_kses_post( $step->get_description() ); ?>
+	</p>
 
 	<?php if ( $step->get_image() ) : ?>
 		<p>
-			<a href="<?= $step->get_image(); ?>">
-				<img src="<?= $step->get_image(); ?>" alt="Step <?= $n; ?>">
+			<a href="<?= esc_url_raw( $step->get_image() ); ?>">
+				<img src="<?= esc_url_raw( $step->get_image() ); ?>" alt="Step <?= $n; ?>">
 			</a>
 		</p>
 	<?php endif; ?>
-	<p>
-		<?= $step->get_description(); ?>
-	</p>
 <?php endforeach; ?>

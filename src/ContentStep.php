@@ -2,7 +2,7 @@
 
 namespace WordCampEurope\WorkshopAuth;
 
-class PageStep {
+class ContentStep {
 
 	/**
 	 * @var string
@@ -31,7 +31,7 @@ class PageStep {
 	 *
 	 * @return $this
 	 */
-	public function set_description( string $description ): PageStep {
+	public function set_description( string $description ): ContentStep {
 		$this->description = $description;
 
 		return $this;
@@ -49,7 +49,7 @@ class PageStep {
 	 *
 	 * @return $this
 	 */
-	public function set_image( string $image ): PageStep {
+	public function set_image( string $image ): ContentStep {
 		$this->image = $image;
 
 		return $this;
@@ -67,7 +67,7 @@ class PageStep {
 	 *
 	 * @return $this
 	 */
-	public function set_title( string $title ): PageStep {
+	public function set_title( string $title ): ContentStep {
 		$this->title = $title;
 
 		return $this;

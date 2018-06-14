@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace WordCampEurope\WorkshopAuth;
 
@@ -14,11 +14,6 @@ class View
 	 * @var string
 	 */
 	protected $template;
-
-	/**
-	 * @var array
-	 */
-	protected $data = [];
 
 	public function __construct( string $template_dir = null ) {
 		if ( null === $template_dir ) {
@@ -52,7 +47,7 @@ class View
 	 *
 	 * @return $this
 	 */
-	public function set_template( string $template ) : View {
+	public function set_template( string $template ): View {
 		$this->template = $template;
 
 		return $this;
@@ -60,31 +55,12 @@ class View
 
 	/**
 	 * @param array $data
-	 */
-	public function set_data( array $data ) {
-		$this->data = $data;
-	}
-
-	/**
-	 * @param string $key
-	 * @param mixed  $value
-	 *
-	 * @return $this
-	 */
-	public function add_data( string $key, $value ) {
-		$this->data[ $key ] = $value;
-
-		return $this;
-	}
-
-	/**
-	 * @param string $name
 	 *
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function render(): string {
-		extract( $this->data );
+	public function render( array $data = [] ): string {
+		extract( $data );
 
 		$template = sprintf( '%s/%s.php', $this->template_dir, $this->template );
 

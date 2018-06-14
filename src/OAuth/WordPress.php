@@ -27,7 +27,7 @@ class WordPress {
 	 * @return string
 	 */
 	public function get_authorize_url(): string {
-		if ( empty( $this->client_id ) || empty( $this->redirect_uri ) ) {
+		if ( ! $this->is_valid() ) {
 			throw new \RuntimeException( 'Missing client_id or redirect_uri.' );
 		}
 
@@ -40,6 +40,16 @@ class WordPress {
 		$url = self::API_URL . self::API_ENDPOINT_AUTH . '?' . http_build_query( $params );
 
 		return $url;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_valid(): bool {
+		return
+			! empty( $this->client_id )
+			&& ! empty( $this->client_secret )
+			&& ! empty( $this->redirect_uri );
 	}
 
 	/**

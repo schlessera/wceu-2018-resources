@@ -3,5 +3,5 @@
 
 	<br><br>
 
-	<a href="<?= $url; ?>"><?= $url; ?></a>
+	<a href="<?= esc_url_raw( $url ); ?>"><?= esc_url( $url ); ?></a>
 </p>

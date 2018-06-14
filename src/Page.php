@@ -2,8 +2,7 @@
 
 namespace WordCampEurope\WorkshopAuth;
 
-abstract class Page
-	implements Renderable {
+class Page {
 
 	/**
 	 * @var string
@@ -16,22 +15,9 @@ abstract class Page
 	protected $slug;
 
 	/**
-	 * @var View
+	 * @var string
 	 */
-	protected $view;
-
-	/**
-	 * @param string $slug
-	 * @param View   $view
-	 */
-	public function __construct( string $slug, View $view = null ) {
-		if ( null === $view ) {
-			$view = new View();
-		}
-
-		$this->slug = $slug;
-		$this->view = $view;
-	}
+	protected $url = '';
 
 	/**
 	 * @return string
@@ -70,59 +56,52 @@ abstract class Page
 	}
 
 	/**
-	 * @return false|\WP_Post
-	 */
-	public function get_page() {
-		$page = get_page_by_path( $this->slug );
-
-		if ( ! $page ) {
-			return false;
-		}
-
-		return $page;
-	}
-
-	/**
 	 * @return string
 	 */
-	public function get_permalink(): string {
-		$page = $this->get_page();
-
-		if ( ! $page ) {
-			return '';
-		}
-
-		return get_permalink( $page->ID );
+	public function get_url(): string {
+		return $this->url;
 	}
 
 	/**
-	 * Save the page
-	 *
-	 * @return int|\WP_Error
+	 * @return Page
 	 */
-	public function persist() {
-		if ( empty( $this->slug ) ) {
-			throw new \RuntimeException( 'Missing page slug.' );
-		}
+	public function set_url(): Page {
+		$this->url = get_permalink( $this->get_id() );
 
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function get_id(): int {
 		$page = $this->get_page();
 
-		if ( $this->get_page() ) {
-			return $page->ID;
+		if ( ! $page ) {
+			return $this->persist();
 		}
 
-		return wp_insert_post( [
+		return $page->ID;
+	}
+
+	protected function persist() {
+		$result = wp_insert_post( [
 			'post_type'    => 'page',
 			'post_content' => '',
 			'post_status'  => 'publish',
-			'post_title'   => $this->get_title(),
-			'post_name'    => $this->get_slug(),
+			'post_title'   => $this->title,
+			'post_name'    => $this->slug,
 		] );
+
+		if ( is_wp_error( $result ) ) {
+			$result = 0;
+		}
+
+		return $result;
 	}
 
-	/**
-	 * @return string
-	 */
-	public abstract function render(): string;
+	protected function get_page() {
+		return get_page_by_path( $this->slug );
+	}
 
 }

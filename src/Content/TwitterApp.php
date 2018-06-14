@@ -1,23 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace WordCampEurope\WorkshopAuth\Page;
+namespace WordCampEurope\WorkshopAuth\Content;
 
-use WordCampEurope\WorkshopAuth\OAuth;
-use WordCampEurope\WorkshopAuth\Page;
-use WordCampEurope\WorkshopAuth\PageStep;
-use WordCampEurope\WorkshopAuth\PageSteps;
+use WordCampEurope\WorkshopAuth\ContentSteps;
 use WordCampEurope\WorkshopAuth\View;
+use WordCampEurope\WorkshopAuth\Content;
 
-class TwitterApp extends Page {
-
-	/**
-	 * @param View $view
-	 */
-	public function __construct( View $view = null ) {
-		$this->set_title( 'Create a Twitter App' );
-
-		parent::__construct( 'wceu-twitter-app', $view );
-	}
+class TwitterApp extends Content {
 
 	/**
 	 * @param int $id
@@ -29,7 +18,7 @@ class TwitterApp extends Page {
 	}
 
 	public function render(): string {
-		$steps = new PageSteps();
+		$steps = new ContentSteps();
 
 		$steps->add_step()
 		      ->set_title( 'Go to Twitter Apps' )
@@ -42,7 +31,7 @@ class TwitterApp extends Page {
 		$steps->add_step()
 		      ->set_title( 'Configure the App' )
 		      ->set_image( $this->get_image( 2 ) )
-		      ->set_description( 'Use a fully qualified domain name (FQDN) for "Website" and use the same domain for "Callback URLs" with the suffix "' . $this->get_slug() . '".' );;
+		      ->set_description( 'Use a fully qualified domain name (FQDN) for "Website" and use the same domain for "Callback URLs" with the suffix "' . $this->page->get_slug() . '".' );;
 
 		$steps->add_step()
 		      ->set_title( 'Go to Keys and Access Tokens Tab' )
@@ -62,10 +51,12 @@ class TwitterApp extends Page {
 		      ->set_title( 'Update env.php' )
 		      ->set_description( 'Add the API Key, API Secret, Access Token and Access Token Secret to the Twitter env variables in env.php (found in the root of this plugin).' );
 
-		return $this->view
-			->add_data( 'steps', $steps->get_steps() )
-			->set_template( 'partial/steps' )
-			->render();
+		$view = new View();
+		$view->set_template( 'partial/steps' );
+
+		return $view->render( [
+			'steps' => $steps,
+		] );
 	}
 
 }
