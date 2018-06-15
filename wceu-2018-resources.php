@@ -26,9 +26,10 @@ if ( is_readable( $autoloader ) ) {
 require __DIR__ . '/env.php';
 
 $pages_config = [
-	'wceu-wp-auth'     => 'Generate a WordPress.com OAuth Token',
-	'wceu-wp-app'      => 'Create a WordPress.com App',
-	'wceu-twitter-app' => 'Create Twitter App',
+	'wceu-wp-auth'      => 'Generate a WordPress.com OAuth Token',
+	'wceu-wp-app'       => 'Create a WordPress.com App',
+	'wceu-twitter-app'  => 'Create Twitter App',
+	'wceu-git-branches' => 'The Branch-Menu for Today',
 ];
 
 $wceu_pages = new Pages();
@@ -53,6 +54,7 @@ add_action( 'init', function () use ( $wceu_pages ) {
 		new Content\WPAuth( $page_wp_auth, $page_wp_app->get_url(), $oauth ),
 		new Content\WPApp( $page_wp_app, $page_wp_auth->get_url() ),
 		new Content\TwitterApp( $wceu_pages->get_page( 'wceu-twitter-app' ) ),
+		new Content\GitBranches( $wceu_pages->get_page( 'wceu-git-branches' ) ),
 	];
 
 	foreach ( $contents as $content ) {
