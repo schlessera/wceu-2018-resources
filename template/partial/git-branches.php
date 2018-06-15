@@ -16,7 +16,17 @@
 </p>
 
 <p>
-	To switch a branch, go into the wceu-2018-code folder using your terminal and type:
+	To switch a branch, go into the 'wceu-2018-code' folder using your terminal. If you made changes, you should stash them first:
+</p>
+
+<p>
+	<code>
+		git stash
+	</code>
+</p>
+
+<p>
+	And then:
 </p>
 
 <p>

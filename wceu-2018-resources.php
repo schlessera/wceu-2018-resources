@@ -48,7 +48,7 @@ add_action( 'init', function () use ( $wceu_pages ) {
 	$oauth = new OAuth\WordPress();
 	$oauth->set_client_id( getenv( 'WORDPRESS_COM_CLIENT_ID' ) )
 	      ->set_client_secret( getenv( 'WORDPRESS_COM_CLIENT_SECRET' ) )
-	      ->set_redirect_uri( $page_wp_app->get_url() );
+	      ->set_redirect_uri( $page_wp_auth->get_url() );
 
 	$contents = [
 		new Content\WPAuth( $page_wp_auth, $page_wp_app->get_url(), $oauth ),
