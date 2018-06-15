@@ -18,7 +18,7 @@ class GitBranches extends Content {
 			'4-test-me-if-you-can',
 			'4-test-me-if-you-can-final',
 			'5-sort-it-out',
-			'6-that-all-folks',
+			'6-thats-all-folks',
 		];
 
 		$view = new View();
